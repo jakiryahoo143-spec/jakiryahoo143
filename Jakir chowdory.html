@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মাসিক বাসা ভাড়া হিসাব</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+}
+
+/* ===== Navbar ===== */
+.navbar{
+    background:green;
+    padding:10px 0;
+    text-align:center;
+}
+
+.navbar a{
+    background:#fff;
+    color:green;
+    text-decoration:none;
+    padding:8px 16px;
+    margin:0 6px;
+    border-radius:6px;
+    font-weight:600;
+    display:inline-block;
+    transition:0.3s;
+}
+
+.navbar a:hover{
+    background:darkgreen;
+    color:#fff;
+}
+
+/* ===== Center Box ===== */
+.wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:20px;
+}
+
+.box{
+    width:95%;
+    max-width:450px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+label{
+    font-weight:600;
+    font-size:14px;
+    display:block;
+    margin-bottom:5px;
+}
+
+select,input{
+    width:100%;
+    padding:10px;
+    margin-bottom:14px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+    box-sizing:border-box;
+}
+
+input:focus,select:focus{
+    outline:none;
+    border-color:green;
+}
+
+/* ===== BOTH BUTTON SAME SIZE ===== */
+button,
+.secondary-btn{
+    width:100%;
+    padding:12px;
+    font-size:16px;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+/* Main Button */
+button{
+    background:green;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+/* Secondary Button */
+.secondary-btn{
+    display:block;
+    text-align:center;
+    margin-top:10px;
+    background:#fff;
+    color:green;
+    border:2px solid green;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.secondary-btn:hover{
+    background:green;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<a href="https://docs.google.com/spreadsheets/d/1mvmb1i2-ZIE16oYEqUrUvKGtGumw4-l2fpInq1ojIzg/edit?usp=sharing" target="_blank" rel="noopener noreferrer">মাসিক হিসাব</a>
+<a href="https://docs.google.com/spreadsheets/d/1nRlIk_AQ9VWaXqOr6Kzn7kiU3ubzzXJbdopGh9cQKoc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ডাটা রিমুভ</a>
+<a href="https://github.com/ahplatform/Jakirchowdrory" target="_blank" rel="noopener noreferrer">ডাউনলোড</a>
+</div>
+
+<div class="wrapper">
+<div class="box">
+
+<h2>মাসিক বাসা ভাড়া হিসাব</h2>
+
+<form id="rentForm">
+
+<label>নাম নির্বাচন করুন</label>
+<select name="name" id="nameSelect" required>
+<option value="">নাম নির্বাচন করুন</option>
+<option>মোঃ মাইনুল ইসলাম</option>
+<option>মোঃ রাজিকুল ইসলাম</option>
+<option>মোছাঃ হোসনেয়ারা আক্তার</option>
+<option>মোঃ শিউলী আক্তার</option>
+<option>মোঃ জামাতুল্লাহ হোসেন</option>
+<option>মোঃ শহিদুল ইসলাম</option>
+<option>মোছাঃ আশরাফ হোসেন</option>
+<option>মোঃ আরশাফ হোসেন ২</option>
+<option>সাগর ভ্র্যরমন</option>
+<option>শিল্পি আক্তার</option>
+<option>সাগর ভ্র্যরমন ২</option>
+<option>মোঃ সজীব হোসেন</option>
+<option> নাই</option>
+</select>
+
+<label>মাস নির্বাচন করুন</label>
+<select name="month" required>
+<option value="">মাস নির্বাচন করুন</option>
+<option>January</option>
+<option>February</option>
+<option>March</option>
+<option>April</option>
+<option>May</option>
+<option>June</option>
+<option>July</option>
+<option>August</option>
+<option>September</option>
+<option>October</option>
+<option>November</option>
+<option>December</option>
+</select>
+
+<div id="billFields"></div>
+
+<button type="submit">ডাটা জমা দিন</button>
+
+<a href="https://docs.google.com/spreadsheets/d/1wLYTNpTwPKUvMXf-3iZR4MKqJO5iUhi2obWLq8LThZM/edit?usp=sharing" 
+class="secondary-btn" target="_blank" rel="noopener noreferrer">
+নাম পরিবর্তন / নতুন সদস্য যোগ করুন
+</a>
+
+</form>
+</div>
+</div>
+
+<script>
+const billTypes = [
+"অতীত ইউনিট",
+"বর্তমান ইউনিট",
+"মোট ইউনিট",
+"বিদ্যুৎ বিল",
+"বকেয়া বিল",
+"মাসিক ভাড়া",
+"বকেয়া ভাড়া",
+"মোট বকেয়া",
+"রশিদ নং"
+];
+
+const nameSelect = document.getElementById("nameSelect");
+const billContainer = document.getElementById("billFields");
+
+nameSelect.addEventListener("change", function(){
+billContainer.innerHTML = "";
+if(this.value !== ""){
+billTypes.forEach(function(type,index){
+let label = document.createElement("label");
+label.innerText = type;
+
+let input = document.createElement("input");
+input.type = "number";
+input.placeholder = type + " লিখুন";
+input.name = "bill_" + index;
+
+billContainer.appendChild(label);
+billContainer.appendChild(input);
+});
+}
+});
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbwIvznyCfxDGWmM5EHWZ6huFKANUm42BukwalfUbmbHsDeMLeazEUOTb_yZyCBO0cv0/exec";
+
+document.getElementById("rentForm")
+.addEventListener("submit", function(e){
+e.preventDefault();
+fetch(scriptURL,{
+method:"POST",
+body:new FormData(this)
+})
+.then(res=>res.text())
+.then(response=>{
+if(response.trim()==="Success"){
+alert("ডাটা সফলভাবে জমা হয়েছে ✅");
+this.reset();
+billContainer.innerHTML="";
+}else{
+alert(response);
+}
+})
+.catch(()=>alert("Error ❌"));
+});
+</script>
+
+</body>
+</html>
